@@ -1,61 +1,60 @@
-import { useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Import Router components
 import {
-  TextField,
-  Button,
-  Typography,
   Box,
+  Typography,
   Container,
-  CssBaseline,
+  Button,
+  Card,
+  CardContent,
+  CardActions,
+  Grid,
 } from "@mui/material";
 import drlogo from "/drcliniclogo.png";
+import Footer from "./components/footer"; // Correct relative path
+
+// Import the Login Page Components
+import DoctorLogin from "./pages/DoctorLogin";
+import ReceptionistLogin from "./pages/ReceptionistLogin";
+import PharmaLogin from "./pages/PharmaLogin";
+
 function App() {
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login Submitted:", credentials);
+  const handleNavigate = (path) => {
+    window.location.href = path; // Change to `useNavigate` if using React Router
   };
 
   return (
-    <>
-      <Box
-        sx={{
-          minHeight: "100vh", // Ensures the parent container spans full viewport height
-          display: "flex",
-          width:"100%",
-          justifyContent: "center", // Horizontal centering
-          alignItems: "center", // Vertical centering
-          backgroundColor: "#f5f5f5", // Subtle background color
-          padding: 2, // Padding for small screens
-        }}
-      >
-        <Container
-          maxWidth="xxl"
+    <Router>
+      {" "}
+      {/* Wrap the app in Router */}
+      <div style={{ display: "block", overflowX: "hidden" }}>
+        <Box
           sx={{
-            backgroundColor: "white",
-            padding: 4,
-            borderRadius: 2,
-            boxShadow: 3, // Subtle shadow for depth
+            minHeight: "93vh",
+            minWidth: "100vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#f5f5f5",
+            padding: 2,
+            boxSizing: "border-box",
           }}
         >
-          <CssBaseline />
-          <Box
+          <Container
+            maxWidth="lg"
             sx={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
+            {/* Logo */}
             <Box
               sx={{
-                width: "80px",
-                height: "80px",
-                marginBottom: 2,
+                width: "120px",
+                height: "120px",
+                marginBottom: 3,
               }}
             >
               <img
@@ -64,65 +63,171 @@ function App() {
                 style={{ width: "100%" }}
               />
             </Box>
-            <Typography component="h1" variant="h5" gutterBottom>
-              Dr Clinic Login
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              sx={{ mt: 1, width: "100%" }}
-            >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                value={credentials.email}
-                onChange={handleChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={credentials.password}
-                onChange={handleChange}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  backgroundColor: "#007bff",
-                  "&:hover": { backgroundColor: "#0056b3" },
-                }}
-              >
-                Login
-              </Button>
-            </Box>
+
+            {/* Title */}
             <Typography
-              variant="body2"
-              color="text.secondary"
-              align="center"
-              sx={{ mt: 2 }}
+              variant="h4"
+              gutterBottom
+              sx={{
+                textAlign: "center",
+                marginBottom: 4,
+                fontWeight: "bold",
+                color: "#17e2d3",
+              }}
             >
-              © 2024 Dr Clinic Doom
+              Welcome to Dr Clinic Portal
             </Typography>
-          </Box>
-        </Container>
-      </Box>
-     
-    </>
+
+            {/* Cards Container */}
+            <Grid
+              container
+              spacing={4}
+              justifyContent="center"
+              alignItems="stretch"
+            >
+              {/* Doctor Card */}
+              <Grid item xs={12} sm={6} md={4}>
+                <Card
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    height: "100%",
+                    boxShadow: 3,
+                    borderRadius: 3,
+                    textAlign: "center",
+                    backgroundColor: "#ffffff",
+                    "&:hover": {
+                      boxShadow: 6,
+                    },
+                  }}
+                >
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom color="#17e2d3">
+                      Doctor Login
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Login as a doctor to manage your schedule and patients.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "#0d8279",
+                        color: "#fff",
+                        "&:hover": {
+                          backgroundColor: "#17e2d3",
+                        },
+                      }}
+                      onClick={() => handleNavigate("/doctor-login")}
+                    >
+                      Go to Doctor Login
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+
+              {/* Receptionist Card */}
+              <Grid item xs={12} sm={6} md={4}>
+                <Card
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    height: "100%",
+                    boxShadow: 3,
+                    borderRadius: 3,
+                    textAlign: "center",
+                    backgroundColor: "#ffffff",
+                    "&:hover": {
+                      boxShadow: 6,
+                    },
+                  }}
+                >
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom color="#17e2d3">
+                      Receptionist Login
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Login to manage appointments and patient records.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "#0d8279",
+                        color: "#fff",
+                        "&:hover": {
+                          backgroundColor: "#17e2d3",
+                        },
+                      }}
+                      onClick={() => handleNavigate("/receptionist-login")}
+                    >
+                      Go to Receptionist Login
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+
+              {/* Pharma Card */}
+              <Grid item xs={12} sm={6} md={4}>
+                <Card
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    height: "100%",
+                    boxShadow: 3,
+                    borderRadius: 3,
+                    textAlign: "center",
+                    backgroundColor: "#ffffff",
+                    "&:hover": {
+                      boxShadow: 6,
+                    },
+                  }}
+                >
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom color="#17e2d3">
+                      Pharma Login
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Login to manage inventory and prescriptions.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "#0d8279",
+                        color: "#fff",
+                        "&:hover": {
+                          backgroundColor: "#17e2d3",
+                        },
+                      }}
+                      onClick={() => handleNavigate("/pharma-login")}
+                    >
+                      Go to Pharma Login
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+        <Footer />
+      </div>
+      {/* Define Routes here */}
+      <Routes>
+        <Route path="/doctor-login" element={<DoctorLogin />} />
+        <Route path="/receptionist-login" element={<ReceptionistLogin />} />
+        <Route path="/pharma-login" element={<PharmaLogin />} />
+      </Routes>
+    </Router>
   );
 }
 
