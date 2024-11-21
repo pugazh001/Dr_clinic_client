@@ -8,7 +8,6 @@ import {
   CssBaseline,
 } from "@mui/material";
 import drlogo from "/drcliniclogo.png";
-import  Footer  from "./components/footer";
 function App() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -28,6 +27,7 @@ function App() {
         sx={{
           minHeight: "100vh", // Ensures the parent container spans full viewport height
           display: "flex",
+          width:"100%",
           justifyContent: "center", // Horizontal centering
           alignItems: "center", // Vertical centering
           backgroundColor: "#f5f5f5", // Subtle background color
@@ -35,7 +35,7 @@ function App() {
         }}
       >
         <Container
-          maxWidth="xs"
+          maxWidth="xxl"
           sx={{
             backgroundColor: "white",
             padding: 4,
@@ -121,7 +121,7 @@ function App() {
           </Box>
         </Container>
       </Box>
-      <Footer ></Footer>
+     
     </>
   );
 }
